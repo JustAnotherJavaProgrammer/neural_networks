@@ -23,7 +23,10 @@ public class Perceptron {
 		patterns.add(pattern);
 	}
 
-	public void teach(int iterations) {
+	public int teach(int iterations, boolean stopWhenPerfect) {
+		if(stopWhenPerfect && evaluate() == patterns.size()) {
+			return 0;
+		}
 		for (int i = 0; i < iterations; i++) {
 			int patternIndex = (int) (Math.random() * patterns.size());
 			int[] pattern = patterns.get(patternIndex);
@@ -32,7 +35,11 @@ public class Perceptron {
 			weights[0][3] = calcNewWeight(weights[0][3], pattern[0], output, correctOutput);
 			weights[1][3] = calcNewWeight(weights[1][3], pattern[1], output, correctOutput);
 			weights[2][3] = calcNewWeight(weights[2][3], 1, output, correctOutput);
+			if(stopWhenPerfect && evaluate() == patterns.size()) {
+				return i+1;
+			}
 		}
+		return iterations;
 	}
 
 	private double calcNewWeight(double oldWeight, int input, int output, int correctOutput) {
@@ -98,6 +105,14 @@ public class Perceptron {
 			System.out.println();
 			System.out.println("---");
 		}
+	}
+	
+	public int evaluate() {
+		int correct = 0;
+		for (int[] pattern : patterns) {
+			correct += run(pattern) == func.func(pattern) ? 1:0;
+		}
+		return correct;
 	}
 
 	public interface TargetFunction {
