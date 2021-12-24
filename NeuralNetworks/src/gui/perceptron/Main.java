@@ -1,4 +1,4 @@
-package gui;
+package gui.perceptron;
 
 import core.perceptron.Perceptron;
 
