@@ -35,8 +35,9 @@ public class ImagePatternDirectory implements Iterator<Pattern> {
 
 	@Override
 	public ImagePattern next() {
+		i++;
 		try {
-			return new ImagePattern(ImageIO.read(files[i]));
+			return new ImagePattern(ImageIO.read(files[i-1]));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

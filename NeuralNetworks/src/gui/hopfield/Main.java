@@ -37,11 +37,13 @@ public class Main {
 		}
 		
 		hopfield.updateWeights(new ImagePatternDirectory(chooser.getSelectedFile()), true);
+		System.out.println("Saving to disk...");
 		try {
-			hopfield.outputToStream(Files.newOutputStream(Paths.get("\\net.mod"), StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE_NEW));
+			hopfield.outputToStream(Files.newOutputStream(Paths.get("C:\\Users\\xxxxx\\Downloads\\congress-smol", "\\net.mod"), StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE_NEW));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Done!");
 	}
 
 }
